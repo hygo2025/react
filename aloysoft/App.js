@@ -1,36 +1,21 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { createStore, applyMiddleware } from "redux";
-import { Provider, connect } from "react-redux";
-import axios from "axios";
-import axiosMiddleware from "redux-axios-middleware";
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import reducer from "./src/reducers/reducer";
-import RepoList from "./src/component/RepoList";
+import { Header } from './components/common'
+import LoginForm from './components/LoginForm'
 
-const client = axios.create({
-  baseURL: "https://api.github.com",
-  responseType: "json"
-});
+class App extends Component {
 
-const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
-
-export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          <RepoList />
+      <View>
+        <Header headerText="Authentication"></Header>
+        <View>
+          <LoginForm />
         </View>
-      </Provider>
-    );
+      </View>
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    marginTop: 50
-  }
-});
+export default App;
